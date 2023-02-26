@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+    <style>
+        body {
+            font-family: arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input[type=text], input[type=password], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="radio"] {
+            margin-right: 10px !important;
+            margin-left: 10px !important;
+        }
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .row {
+            display: block;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        .gender {
+            margin-top: 10px;
+        }
+        .containerRegister {
+            border-radius: 5px;
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 50px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <div class="containerRegister">
+        <h2>Đăng ký tài khoản</h2>
+        @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+        {
+            <label for="studentId" class="row">Mã sinh viên:</label>
+            <input type="text" id="studentId" name="studentId" placeholder="Nhập mã sinh viên">
+
+            <label for="studentClass" class="row">Lớp biên chế:</label>
+            <input type="text" id="studentClass" name="studentClass" placeholder="Nhập lớp biên chế">
+
+            <label for="username" class="row">Tài khoản:</label>
+            <input type="text" id="username" name="username" placeholder="Nhập tài khoản">
+
+            <label for="password" class="row">Mật khẩu:</label>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
+
+            <label for="fullname" class="row">Họ tên:</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Nhập họ tên">
+
+            <label for="gender" class="row">Giới tính:</label>
+            <div class="gender">
+                <label for="male">Nam</label><input type="radio" id="male" name="gender" value="male" checked>
+                <label for="female">Nữ</label><input type="radio" id="female" name="gender" value="female">
+            </div>
+            @Html.ValidationSummary()
+            <input type="submit" value="Đăng ký">
+        }
+    </div>
