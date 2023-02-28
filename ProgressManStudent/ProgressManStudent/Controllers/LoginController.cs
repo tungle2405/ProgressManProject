@@ -1,52 +1,69 @@
-﻿using ProgressManStudent.Models;
+﻿using DataAccess.StudentAPI;
+using Newtonsoft.Json;
+using ProgressManStudent.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Configuration;
-using static System.Net.Mime.MediaTypeNames;
-using System.Reflection;
-using static ProgressManStudent.Models.LoginModel;
-using System.Web.UI;
-using System.Xml.Linq;
 
 namespace ProgressManStudent.Controllers
 {
     public class LoginController : Controller
     {
-        SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString);
+
+        Uri baseAddress = new Uri("https://localhost:44336/api");
+        HttpClient client;
+        public LoginController()
+        {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+        }
+
         // GET: Login
         public ActionResult Index()
         {
-            var test = Session["UserSuccess"];
-            if (test != null)
+            LoginModel user = new LoginModel();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/login").Result;
+            if(response.IsSuccessStatusCode)
             {
-                // Nếu đã tồn tại, chuyển hướng đến trang chủ
-                return RedirectToAction("Index", "Home");
+                string data = response.Content.ReadAsStringAsync().Result;
+                JsonConvert.DeserializeObject<LoginModel>(data);
+                return Json(response.Content);
             }
             return View();
         }
+
         [HttpPost]
-        public ActionResult Index(LoginModel model)
+        public ActionResult Login(LoginModel user)
         {
-            List<UserInfo> list = new List<UserInfo>();
-            //LoginModel loginModelValue = new LoginModel();
-            list = model.Login(model.Username,model.Password);
-            if(list.Count > 0)
+            try
             {
-                Session["UserSuccess"] = model.Username.Trim();
-                Session["UserId"] =  list[0].MaSinhVien.Trim();
-                return RedirectToAction("Index", "Home", new {id = list[0].MaSinhVien.Trim(), name = list[0].HoTen.Trim() });
+                string data = JsonConvert.SerializeObject(user);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = client.PostAsync(client.BaseAddress + "/login", content).Result;
+                string contents = response.Content.ReadAsStringAsync().Result.ToString();
+                CResponeMessage crMess = new CResponeMessage();
+                crMess = JsonConvert.DeserializeObject<CResponeMessage>(contents);
+                if (crMess.Code == 0)
+                {
+                    return Json(contents);
+                }
+
             }
-            else
+            catch(Exception ex)
             {
-                ViewBag.Error = "Sai tên đăng nhập hoặc mật khẩu.";
-                return View();
+                throw ex;
             }
-            
+
+            return View("Index");
+        }
+
+        public ActionResult Logout() {
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }
