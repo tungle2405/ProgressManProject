@@ -190,7 +190,7 @@ BEGIN
 
 	IF(@CodeCheck <> 0)
 		BEGIN
-			SELECT @Code = 0, @Message = N'Đăng nhập thành công!', @Data = (SELECT SinhVien.HoTen FROM SinhVien WHERE TaiKhoan = @taikhoan AND MatKhau = @matkhau);
+			SELECT @Code = 0, @Message = N'Đăng nhập thành công!', @Data = (SELECT SinhVien.MaSinhVien FROM SinhVien WHERE TaiKhoan = @taikhoan AND MatKhau = @matkhau);
 			RETURN;
 		END
 	ELSE

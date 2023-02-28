@@ -10,6 +10,17 @@ namespace ProgressManStudent.Controllers
     {
         public ActionResult Index()
         {
+            try
+            {
+                if(Session["user"] == null)
+                {
+                    return RedirectToAction("Index","Login");
+                }
+            }
+            catch(Exception ex) {
+                return RedirectToAction("Index", "Login");
+            }
+
             return View();
         }
 

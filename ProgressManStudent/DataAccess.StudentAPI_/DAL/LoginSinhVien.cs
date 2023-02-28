@@ -44,7 +44,7 @@ namespace DataAccess.StudentAPI.DAL
                 resMess.Message = Convert.ToString(cmd.Parameters["@Message"].Value);
                 resMess.Data = Convert.ToString(cmd.Parameters["@Data"].Value);
 
-                 return resMess;
+                return resMess;
             }
             catch (Exception ex) {
                 throw ex;

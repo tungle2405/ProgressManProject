@@ -25,14 +25,18 @@ namespace ProgressManStudent.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            LoginModel user = new LoginModel();
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/login").Result;
-            if(response.IsSuccessStatusCode)
+            try
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                JsonConvert.DeserializeObject<LoginModel>(data);
-                return Json(response.Content);
+                if (Session["user"] != null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             return View();
         }
 
@@ -49,6 +53,11 @@ namespace ProgressManStudent.Controllers
                 crMess = JsonConvert.DeserializeObject<CResponeMessage>(contents);
                 if (crMess.Code == 0)
                 {
+                    Session["user"] = crMess.Data;
+                    return Json(contents);
+                }
+                else
+                {
                     return Json(contents);
                 }
 
@@ -56,13 +65,12 @@ namespace ProgressManStudent.Controllers
             catch(Exception ex)
             {
                 throw ex;
-            }
-
-            return View("Index");
+            }            
         }
 
         public ActionResult Logout() {
 
+            Session.Clear();
             return RedirectToAction("Index", "Login");
         }
     }
