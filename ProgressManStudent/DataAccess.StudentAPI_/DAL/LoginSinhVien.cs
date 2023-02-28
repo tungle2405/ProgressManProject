@@ -29,8 +29,8 @@ namespace DataAccess.StudentAPI.DAL
                 var sqlcon = DBConnection.GetSqlConnection(connectionString);
                 SqlCommand cmd = new SqlCommand("SV_SP_CheckLogin", sqlcon);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@taikhoan", login.TaiKhoan);
-                cmd.Parameters.AddWithValue("@matkhau", login.MatKhau);
+                cmd.Parameters.AddWithValue("@taikhoan", ((object)login.TaiKhoan) ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@matkhau", ((object)login.MatKhau) ?? DBNull.Value);
 
                 cmd.Parameters.Add("@Code", SqlDbType.NVarChar, 100);
                 cmd.Parameters["@Code"].Direction = ParameterDirection.Output;

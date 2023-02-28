@@ -23,7 +23,7 @@
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                                        <span class="h1 fw-bold mb-0">Logo</span>
+                                        <span class="h1 fw-bold mb-0">Đăng nhập</span>
                                     </div>
 
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Đăng nhập tài khoản sinh viên</h5>
@@ -91,12 +91,13 @@
                         text: obj.Message,
                         timer: 1500
                     });
+                    setTimeout(function () { window.location.href = "home/index" }, 1500);
                 } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Lỗi!',
                         text: obj.Message,
-                        timer: 1500
+                        timer: 3000
                     })
                 }
             },
@@ -106,9 +107,6 @@
                     title: 'Lỗi!',
                     text: 'Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText,
                 })
-            },
-            complete: function (data) {
-                setTimeout(function () { window.location.href = "home/index" }, 1000);
             }
         });
 
