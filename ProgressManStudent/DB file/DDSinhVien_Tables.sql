@@ -1,4 +1,4 @@
--- create tables
+﻿-- create tables
 CREATE TABLE PhanQuyen (
     MaPhanQuyen nchar(10) PRIMARY KEY,
     TenPhanQuyen nvarchar(50) NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE GV_DiemDanh_SV (
 	FOREIGN KEY (MaGiangVien) REFERENCES GiangVien (MaGiangVien) ON UPDATE NO ACTION,
 );
 
-
+--------------------------------------
 CREATE PROCEDURE spLogin
 @tenTaiKhoan VARCHAR(50),
 @matKhau VARCHAR(50)
@@ -154,3 +154,51 @@ BEGIN
     END CATCH
 END
 select * from SinhVien
+
+--------------------------------------
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		TungLX
+-- Create date: 21/2/2023
+-- Description:	Kiểm tra tình trạng tài khoản login
+-- =============================================
+CREATE PROCEDURE SV_SP_CheckLogin 
+	-- Add the parameters for the stored procedure here
+	@taikhoan VARCHAR(100),
+	@matkhau VARCHAR(100),
+
+	-- Return Result
+	@Code INT OUTPUT,
+	@Message NVARCHAR(100) OUTPUT,
+	@Data NVARCHAR(100) OUTPUT
+AS
+BEGIN
+	DECLARE @CodeCheck SMALLINT;
+	-- Insert statements for procedure here
+	SET NOCOUNT ON;
+	IF(@taikhoan IS NULL OR @matkhau IS NULL)
+		BEGIN 
+			SELECT @Code = -1, @Message = N'Tài Khoản hoặc mật khẩu không được để rỗng!', @Data = NULL;
+			RETURN;
+		END
+	
+	SET @CodeCheck = (SELECT Count(1) FROM SinhVien WHERE TaiKhoan = @taikhoan AND MatKhau = @matkhau);
+
+	IF(@CodeCheck <> 0)
+		BEGIN
+			SELECT @Code = 0, @Message = N'Đăng nhập thành công!', @Data = (SELECT SinhVien.HoTen FROM SinhVien WHERE TaiKhoan = @taikhoan AND MatKhau = @matkhau);
+			RETURN;
+		END
+	ELSE
+		BEGIN
+			SELECT @Code = -1, @Message = N'Đăng nhập không thành công!', @Data = NULL;
+			RETURN;
+		END;
+END
+GO
+
+------------------------------------------------------
