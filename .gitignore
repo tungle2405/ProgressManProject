@@ -80,3 +80,6 @@
 /ProgressManStudent/.vs/ProgressManStudent/FileContentIndex/6757a822-6697-401e-86be-241c86e56c1a.vsidx
 /ProgressManStudent/.vs/ProgressManStudent/FileContentIndex/da52a010-6659-4e58-ad6e-5aa4fd5657f5.vsidx
 /ProgressManStudent/.vs/ProgressManStudent/config/applicationhost.config
+/ProgressManStudent/DataAccess.StudentAPI/obj
+/ProgressManStudent/ProgressManStudent/ProgressManStudent.csproj.user
+/ProgressManStudent/ProgressManStudentAPI/ProgressManStudentAPI.csproj.user
