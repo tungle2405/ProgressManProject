@@ -185,14 +185,17 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess.StudentAPI_\DataAccess.StudentAPI_.csproj">
-      <Project>{0105A383-E047-4353-9FF8-8111C0E3305E}</Project>
-      <Name>DataAccess.StudentAPI_</Name>
+    <ProjectReference Include="..\CoreLib\CoreLib.csproj">
+      <Project>{1ab07a03-ab81-4966-a99a-c27dd51c2618}</Project>
+      <Name>CoreLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProgressManStudentAPI\ProgressManStudentAPI.csproj">
       <Project>{2c05ce8d-8c86-4c5e-8ad5-b6999f64f183}</Project>
       <Name>ProgressManStudentAPI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
