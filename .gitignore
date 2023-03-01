@@ -83,3 +83,5 @@
 /ProgressManStudent/DataAccess.StudentAPI/obj
 /ProgressManStudent/ProgressManStudent/ProgressManStudent.csproj.user
 /ProgressManStudent/ProgressManStudentAPI/ProgressManStudentAPI.csproj.user
+/ProgressManStudent/CoreLib/obj/Debug
+/ProgressManStudent/ProgressManStudent/obj/Debug/DesignTimeResolveAssemblyReferences.cache

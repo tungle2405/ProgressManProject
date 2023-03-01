@@ -1,10 +1,12 @@
-﻿using DataAccess.StudentAPI;
+﻿using CoreLib.DAL;
+using CoreLib.DTO;
 using Newtonsoft.Json;
 using ProgressManStudent.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -45,6 +47,9 @@ namespace ProgressManStudent.Controllers
         {
             try
             {
+                //encrypt password
+                user.MatKhau = (user.MatKhau != null) ? new HashCode().Encrypt(user.MatKhau) : null;
+
                 string data = JsonConvert.SerializeObject(user);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 var response = client.PostAsync(client.BaseAddress + "/login", content).Result;
