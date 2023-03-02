@@ -31,6 +31,7 @@ CREATE TABLE GiangVien (
 	FOREIGN KEY (MaPhanQuyen) REFERENCES PhanQuyen (MaPhanQuyen) ON UPDATE CASCADE,
 );
 
+
 CREATE TABLE SinhVien (
     MaSinhVien nchar(10) PRIMARY KEY,
     HoTen nvarchar(50) NOT NULL,
@@ -121,39 +122,6 @@ CREATE TABLE GV_DiemDanh_SV (
 	FOREIGN KEY (MaGiangVien) REFERENCES GiangVien (MaGiangVien) ON UPDATE NO ACTION,
 );
 
---------------------------------------
-CREATE PROCEDURE spLogin
-@tenTaiKhoan VARCHAR(50),
-@matKhau VARCHAR(50)
-AS
-BEGIN
-	select * from SinhVien where SinhVien.TaiKhoan = @tenTaiKhoan and SinhVien.MatKhau = @matKhau
-END
-
-DROP PROC spLogin
-
-EXEC spLogin "adminer","123"
-
-CREATE PROCEDURE spRegister
-    @tenTaiKhoan NVARCHAR(50),
-    @matKhau NVARCHAR(50),
-    @maSV NVARCHAR(50),
-    @lop nvarchar(50),
-	@gioiTinh nvarchar(50)
-AS
-BEGIN
-	DECLARE @Result BIT;
-    SET NOCOUNT ON;
-    BEGIN TRY
-        INSERT INTO SinhVien
-        VALUES (@maSV, @tenTaiKhoan, @gioiTinh,@lop,@tenTaiKhoan,@matKhau);
-        SET @Result = 1;
-    END TRY
-    BEGIN CATCH
-        SET @Result = 0;
-    END CATCH
-END
-select * from SinhVien
 
 --------------------------------------
 
@@ -201,4 +169,27 @@ BEGIN
 END
 GO
 
+------------------------------------------------------
+-- =============================================
+-- Author:		Binh
+-- Create date: 02/3/2023
+-- Description:	Kiểm tra tình trạng tài khoản login Giáo viên
+-- =============================================
+INSERT INTO PhanQuyen VALUES ('1',N'admin')
+INSERT INTO DonVi VALUES ('1',N'Quản lý')
+INSERT INTO GiangVien VALUES ('1', N'Nguyễn Tuấn Anh', N'Nam', N'Giáo viên', N'Tiến Sĩ', '1','1','admin','DUEuVOe9dto=')
+
+CREATE PROCEDURE GV_SP_CheckLogin
+@tenTaiKhoan VARCHAR(50),
+@matKhau VARCHAR(50)
+AS
+BEGIN
+	select * from GiangVien where GiangVien.TaiKhoan = @tenTaiKhoan and GiangVien.MatKhau = @matKhau
+END
+
+DROP PROC GV_SP_CheckLogin
+
+EXEC GV_SP_CheckLogin "admin","DUEuVOe9dto="
+
+select * from GiangVien
 ------------------------------------------------------

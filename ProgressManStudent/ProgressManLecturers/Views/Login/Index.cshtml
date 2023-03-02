@@ -1,0 +1,159 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<style>
+        form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            color: #555;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"] {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+    {
+        <h2>Đăng nhập</h2>
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Mật khẩu</label>
+        <input type="password" id="password" name="password" required>
+        if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+        <button type="submit">Đăng nhập</button>
+    }*@
+@{
+    Layout = "";
+}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/util.css">
+<link rel="stylesheet" type="text/css" href="~/Content/main.css">
+<!--===============================================================================================-->
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(../images/bg-01.jpg);">
+                <span class="login100-form-title-1">
+                    Đăng nhập
+                </span>
+            </div>
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "login100-form validate-form" })) 
+                {
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Username không được để trống">
+                    <span class="label-input100">Username</span>
+                    <input class="input100" type="text" name="username" placeholder="Hãy nhập username">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="Password không được để trống">
+                    <span class="label-input100">Password</span>
+                    <input class="input100" type="password" name="password" placeholder="Hãy nhập password">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="flex-sb-m w-full p-b-30">
+                <br?></br?>
+                <p style="color: red">@ViewBag.Error</p>
+                    @*<div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Remember me
+                        </label>
+                    </div>*@
+
+                    @*<div>
+                        <a href="@Url.Action("Index", "Register")" class="txt1">
+                            Không có tài khoản?
+                        </a>
+                    </div>*@
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Xác nhận
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!--===============================================================================================-->
+<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/bootstrap/js/popper.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/daterangepicker/moment.min.js"></script>
+<script src="~/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="~/Scripts/main.js"></script>

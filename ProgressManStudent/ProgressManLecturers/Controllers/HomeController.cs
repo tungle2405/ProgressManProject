@@ -8,8 +8,20 @@ namespace ProgressManLecturers.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private void CheckSession()
         {
+            var test = Session["UserSuccess"];
+            if (test == null)
+            {
+                Response.Redirect("~/Login");
+            }
+
+        }
+        public ActionResult Index(string id = "", string name = "")
+        {
+            CheckSession();
+            ViewBag.Id = id;
+            ViewBag.Name = name;
             return View();
         }
 
@@ -25,6 +37,11 @@ namespace ProgressManLecturers.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Login");
         }
     }
 }
