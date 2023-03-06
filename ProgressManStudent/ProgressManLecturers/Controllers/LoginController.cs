@@ -26,6 +26,7 @@ namespace ProgressManLecturers.Controllers
             }
             return View();
         }
+
         [HttpPost]
         public ActionResult Index(LoginModel model)
         {
@@ -33,7 +34,7 @@ namespace ProgressManLecturers.Controllers
             //LoginModel loginModelValue = new LoginModel();
             list = new LoginGiangVien().Login(model.Username, model.Password);
             if (list.Count > 0)
-            {
+            {  
                 Session["UserSuccess"] = model.Username.Trim();
                 Session["UserId"] = list[0].MaGiangVien.Trim();
                 return RedirectToAction("Index", "Home", new { id = list[0].MaGiangVien.Trim(), name = list[0].HoTen.Trim() });
